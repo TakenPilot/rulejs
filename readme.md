@@ -7,15 +7,15 @@ Works great when combined with function libraries like lodash.
 
 ## API
 
-### First
+### rules.first(ruleSet, ...args)
 
 Runs first rule where `when` returns a truthy value
 
-### Select
+### rules.select(ruleSet, ...args)
 
 Returns all rule objects where `when` returns a truthy value
 
-### All
+### rules.all(ruleSet, ...args)
 
 Returns all results where `when` returns a truthy value
 
