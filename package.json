@@ -1,0 +1,23 @@
+{
+  "name": "rulejs",
+  "version": "0.0.1",
+  "description": "rules engine; chain-of-command implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "rules",
+    "rules-engine",
+    "chain-of-command",
+    "when-then"
+  ],
+  "author": "Dane Stuckel",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.4.0",
+    "lodash": "^4.15.0",
+    "mocha": "^3.0.2"
+  }
+}
