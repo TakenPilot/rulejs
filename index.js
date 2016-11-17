@@ -13,6 +13,11 @@ function checkWhen(rule, args) {
   switch (typeof when) {
     case 'function': return !!when.apply(null, args);
     case 'boolean': return when;
+    case 'object':
+      if (_.isRegExp(when)) {
+        return when.test(args[0]);
+      }
+      return true;
     default: return args[0] === when;
   }
 }

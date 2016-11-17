@@ -1,4 +1,4 @@
-Rules.js
+Rule.js
 --------
 
 After re-writing this pattern over three times in three different projects, I should just make it a library instead.

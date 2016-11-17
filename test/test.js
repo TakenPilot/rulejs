@@ -52,6 +52,14 @@ describe('first', function () {
     expect(fn(ruleSet)).to.equal('b');
   });
 
+  it('takes regex', function () {
+    const firstRule = {when: _.constant(false), then: _.constant('a')},
+      secondRule = {when: /b/, then: _.constant('c')},
+      ruleSet = [firstRule, secondRule];
+
+    expect(fn(ruleSet, 'b')).to.equal('c');
+  });
+
   it('returns first passing', function () {
     const firstRule = {when: _.constant(false), then: _.constant('a')},
       secondRule = {when: _.constant(true), then: _.constant('b')},
