@@ -3,6 +3,10 @@
   "version": "0.2.0",
   "description": "rules engine; chain-of-command implementation",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TakenPilot/rulejs.git"
+  },
   "scripts": {
     "test": "mocha"
   },
