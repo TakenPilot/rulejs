@@ -1,9 +1,7 @@
 Rule.js
 --------
 
-After re-writing this pattern over three times in three different projects, I should just make it a library instead.
-
-Works great when combined with function libraries like lodash.
+Simple rule engine pattern. No dependencies.
 
 ## API
 

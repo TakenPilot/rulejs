@@ -1,37 +1,37 @@
 'use strict';
 
-const _ = require('lodash'),
-  expect = require('chai').expect,
-  lib = require('../');
+const assert = require('node:assert').strict;
+const lib = require('../');
+const constant = x => () => x;
 
 describe('select', function () {
   const fn = lib[this.title];
 
   it('returns', function () {
-    const ruleSet = [{when: _.constant(true), then: _.constant('a')}];
+    const ruleSet = [{ when: constant(true), then: constant('a') }];
 
-    expect(fn(ruleSet)).to.deep.equal(ruleSet);
+    assert.deepEqual(fn(ruleSet), ruleSet);
   });
 
   it('does not return false rules', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
-      secondRule = {when: _.constant(true), then: _.constant('b')},
+    const firstRule = { when: constant(false), then: constant('a') },
+      secondRule = { when: constant(true), then: constant('b') },
       ruleSet = [firstRule, secondRule];
 
-    expect(fn(ruleSet)).to.deep.equal([secondRule]);
+    assert.deepEqual(fn(ruleSet), [secondRule]);
   });
 
   it('returns empty array if none pass', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
+    const firstRule = { when: constant(false), then: constant('a') },
       ruleSet = [firstRule];
 
-    expect(fn(ruleSet)).to.deep.equal([]);
+    assert.deepEqual(fn(ruleSet), []);
   });
 
   it('returns when true', function () {
-    const ruleSet = [{when: true, then: _.constant('a')}];
+    const ruleSet = [{ when: true, then: constant('a') }];
 
-    expect(fn(ruleSet)).to.deep.equal(ruleSet);
+    assert.deepEqual(fn(ruleSet), ruleSet);
   });
 });
 
@@ -39,41 +39,41 @@ describe('first', function () {
   const fn = lib[this.title];
 
   it('returns', function () {
-    const ruleSet = [{when: _.constant(true), then: _.constant('a')}];
+    const ruleSet = [{ when: constant(true), then: constant('a') }];
 
-    expect(fn(ruleSet)).to.equal('a');
+    assert.equal(fn(ruleSet), 'a');
   });
 
   it('skips false rules', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
-      secondRule = {when: _.constant(true), then: _.constant('b')},
+    const firstRule = { when: constant(false), then: constant('a') },
+      secondRule = { when: constant(true), then: constant('b') },
       ruleSet = [firstRule, secondRule];
 
-    expect(fn(ruleSet)).to.equal('b');
+    assert.equal(fn(ruleSet), 'b');
   });
 
   it('takes regex', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
-      secondRule = {when: /b/, then: _.constant('c')},
+    const firstRule = { when: constant(false), then: constant('a') },
+      secondRule = { when: /b/, then: constant('c') },
       ruleSet = [firstRule, secondRule];
 
-    expect(fn(ruleSet, 'b')).to.equal('c');
+    assert.equal(fn(ruleSet, 'b'), 'c');
   });
 
   it('returns first passing', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
-      secondRule = {when: _.constant(true), then: _.constant('b')},
-      thirdRule = {when: _.constant(true), then: _.constant('c')},
+    const firstRule = { when: constant(false), then: constant('a') },
+      secondRule = { when: constant(true), then: constant('b') },
+      thirdRule = { when: constant(true), then: constant('c') },
       ruleSet = [firstRule, secondRule, thirdRule];
 
-    expect(fn(ruleSet)).to.equal('b');
+    assert.equal(fn(ruleSet), 'b');
   });
 
   it('returns undefined if none pass', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
+    const firstRule = { when: constant(false), then: constant('a') },
       ruleSet = [firstRule];
 
-    expect(fn(ruleSet)).to.equal(undefined);
+    assert.equal(fn(ruleSet), undefined);
   });
 });
 
@@ -81,33 +81,33 @@ describe('all', function () {
   const fn = lib[this.title];
 
   it('returns', function () {
-    const ruleSet = [{when: _.constant(true), then: _.constant('a')}];
+    const ruleSet = [{ when: constant(true), then: constant('a') }];
 
-    expect(fn(ruleSet)).to.deep.equal(['a']);
+    assert.deepEqual(fn(ruleSet), ['a']);
   });
 
   it('skips false rules', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
-      secondRule = {when: _.constant(true), then: _.constant('b')},
+    const firstRule = { when: constant(false), then: constant('a') },
+      secondRule = { when: constant(true), then: constant('b') },
       ruleSet = [firstRule, secondRule];
 
-    expect(fn(ruleSet)).to.deep.equal(['b']);
+    assert.deepEqual(fn(ruleSet), ['b']);
   });
 
   it('returns all passing', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
-      secondRule = {when: _.constant(true), then: _.constant('b')},
-      thirdRule = {when: _.constant(true), then: _.constant('c')},
+    const firstRule = { when: constant(false), then: constant('a') },
+      secondRule = { when: constant(true), then: constant('b') },
+      thirdRule = { when: constant(true), then: constant('c') },
       ruleSet = [firstRule, secondRule, thirdRule];
 
-    expect(fn(ruleSet)).to.deep.equal(['b', 'c']);
+    assert.deepEqual(fn(ruleSet), ['b', 'c']);
   });
 
   it('returns empty array if none pass', function () {
-    const firstRule = {when: _.constant(false), then: _.constant('a')},
+    const firstRule = { when: constant(false), then: constant('a') },
       ruleSet = [firstRule];
 
-    expect(fn(ruleSet)).to.deep.equal([]);
+    assert.deepEqual(fn(ruleSet), []);
   });
 });
 

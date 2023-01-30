@@ -1,6 +1,7 @@
 'use strict';
 
-const _ = require('lodash');
+const toArgs = x => Array.prototype.slice.call(x);
+const isRegExp = x => typeof x === 'object' && !!x[Symbol.match];
 
 /**
  * @param {object} rule
@@ -14,7 +15,7 @@ function checkWhen(rule, args) {
     case 'function': return !!when.apply(null, args);
     case 'boolean': return when;
     case 'object':
-      if (_.isRegExp(when)) {
+      if (isRegExp(when)) {
         return when.test(args[0]);
       }
       return true;
@@ -46,7 +47,7 @@ function select(ruleSet) {
 
   for (let i = 0; i < ruleSet.length; i++) {
     const rule = ruleSet[i],
-      args = _.slice(arguments, 1);
+      args = toArgs(arguments);
 
     if (checkWhen(rule, args)) {
       selected.push(rule);
@@ -64,7 +65,7 @@ function select(ruleSet) {
 function first(ruleSet) {
   for (let i = 0; i < ruleSet.length; i++) {
     const rule = ruleSet[i],
-      args = _.slice(arguments, 1);
+      args = toArgs(arguments);
 
     if (checkWhen(rule, args)) {
       return returnThen(rule, args);
@@ -82,7 +83,7 @@ function all(ruleSet) {
 
   for (let i = 0; i < ruleSet.length; i++) {
     const rule = ruleSet[i],
-      args = _.slice(arguments, 1);
+      args = toArgs(arguments);
 
     if (checkWhen(rule, args)) {
       result.push(returnThen(rule, args));
