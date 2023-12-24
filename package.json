@@ -1,24 +1,42 @@
 {
   "name": "rulejs",
-  "version": "0.3.0",
-  "description": "rules engine; chain-of-command implementation",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "RuleJS: A versatile and lightweight rules engine for JavaScript, implementing an efficient chain-of-command pattern. Ideal for decision making, workflow processing, and dynamic rule evaluation in Node.js applications.",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/TakenPilot/rulejs.git"
   },
   "scripts": {
-    "test": "mocha"
+    "prepublishOnly": "npm test && npm run build",
+    "build": "tsc",
+    "test": "jest --coverage"
   },
   "keywords": [
-    "rules",
     "rules-engine",
     "chain-of-command",
-    "when-then"
+    "decision-making",
+    "workflow",
+    "javascript-rules",
+    "nodejs",
+    "dynamic-rules",
+    "pattern",
+    "command-pattern",
+    "rule-processing",
+    "business-rules"
   ],
   "author": "Dane Stuckel",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "mocha": ">=10.2.0"
+    "@types/jest": "^29.5.11",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
   }
 }
